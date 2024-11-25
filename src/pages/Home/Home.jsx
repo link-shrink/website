@@ -1,15 +1,21 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
+import { isValidLink } from '../../script/link/validLink'
 import { getShortLinkID } from '../../script/link/getShortLinkID'
 import './Home.css'
 import copyIcon from '../../media/icons/copy.svg'
 import generateIcon from '../../media/icons/generate.svg'
 
 export default function Home() {
+  const linkInput = useRef()
   const [linkID, setLinkID] = useState('')
   const [showCopied, setShowCopied] = useState(false)
   const [inputVal, setInputVal] = useState('')
+  const statesForID = useRef({
+    loading: 'Generating short link',
+    error: 'Error occured try again',
+  }).current
 
   function copy() {
     navigator.clipboard
@@ -21,12 +27,17 @@ export default function Home() {
   }
 
   async function getLinkID() {
+    if (!isValidLink(inputVal)) {
+      setLinkID('invalid')
+      linkInput.current.focus()
+      return
+    }
     if (!inputVal) return
     setLinkID('loading')
     const shortLink = await getShortLinkID(inputVal.trim())
     if (!shortLink.ok) {
       setInputVal('')
-      setLinkID('Error occured try again')
+      setLinkID('error')
       return
     }
     setLinkID(shortLink.data.link_id)
@@ -38,9 +49,16 @@ export default function Home() {
         <div className="list_y home_container">
           <div className="list_x">
             <Input
+              ref={linkInput}
+              className={`${
+                linkID === 'invalid' ? 'home_link_input invalid' : ''
+              }`}
               placeholder="URL"
               autoFocus={true}
-              onChange={(e) => setInputVal(e.target.value)}
+              onChange={(e) => {
+                setInputVal(e.target.value)
+                if (linkID === 'invalid') setLinkID('')
+              }}
             />
             <Button
               className="home_copy_btn"
@@ -52,7 +70,8 @@ export default function Home() {
           </div>
           {linkID &&
             linkID !== 'loading' &&
-            linkID !== 'Error occured try again' && (
+            linkID !== 'error' &&
+            linkID !== 'invalid' && (
               <>
                 <div className="list_x">
                   <Input
@@ -69,16 +88,9 @@ export default function Home() {
                 </div>
               </>
             )}
-          {linkID === 'loading' && (
+          {(linkID === 'loading' || linkID === 'error') && (
             <Input
-              value="Generating short link"
-              className="home_readonly_input"
-              readOnly={true}
-            />
-          )}
-          {linkID === 'Error occured try again' && (
-            <Input
-              value="Error occured try again"
+              value={statesForID[linkID]}
               className="home_readonly_input"
               readOnly={true}
             />

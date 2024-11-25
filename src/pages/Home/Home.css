@@ -5,6 +5,12 @@
   width: 300px;
 }
 
+.home_link_input.invalid {
+  color: var(--home-link-input-error-color);
+  caret-color: var(--home-link-input-error-color);
+  border-color: var(--home-link-input-error-color);
+}
+
 .home_copy_btn {
   padding: 5px 10px;
 }
