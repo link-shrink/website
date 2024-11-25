@@ -1,0 +1,102 @@
+@import url('../../style/utils/icon.css');
+
+hr {
+  width: 100%;
+  border-bottom: 1px solid var(--text-color);
+  margin: 0;
+}
+
+.dev_title {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  border-bottom: 1px solid var(--text-color);
+}
+
+.dev_sub_title {
+  width: 100%;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-bottom: 1px solid var(--text-color);
+}
+
+.dev_list_y > *:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.dev_social_media_icon {
+  width: 30px;
+  height: 30px;
+}
+
+span {
+  background-color: var(--dev-span-bg-color);
+  color: var(--dev-span-text-color);
+  padding: 1px 4px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+p {
+  line-height: 1.2;
+  margin: 0;
+}
+
+.dev_lan_con {
+  border: 1px solid var(--text-color);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.dev_lans {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dev_lans > * {
+  width: 100%;
+
+  &.active {
+    background-color: var(--dev-active-btn-bg-color);
+    color: var(--dev-active-btn-text-color);
+  }
+}
+
+.dev_code {
+  background-color: var(--dev-code-bg-color);
+  padding: 10px;
+  border-radius: 20px;
+  line-height: 1.3;
+  position: relative;
+}
+
+.dev_btn {
+  border-radius: 0 20px 0 20px;
+  border-top: none;
+  border-right: none;
+  padding: 20px 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.copied_msg {
+  padding: 10px 20px;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+  background-color: var(--copy-msg-bg-color);
+  width: max-content;
+  border-radius: 10px;
+  z-index: 1;
+  transition: opacity 0.3s 0.1s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.copied_msg.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}

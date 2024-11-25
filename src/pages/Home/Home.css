@@ -1,0 +1,37 @@
+@import url('../../style/utils/icon.css');
+
+.home_container > * {
+  width: 100%;
+  width: 300px;
+}
+
+.home_copy_btn {
+  padding: 5px 10px;
+}
+
+.home_copy_btn > img {
+  pointer-events: none;
+}
+
+.copied_msg {
+  padding: 10px 20px;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+  background-color: var(--copy-msg-bg-color);
+  width: max-content;
+  border-radius: 10px;
+  transition: opacity 0.3s 0.1s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.copied_msg.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.home_readonly_input {
+  text-align: center;
+}

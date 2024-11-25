@@ -1,0 +1,45 @@
+:root {
+  --bg-color: #fff;
+}
+
+:root {
+  --selection-bg-color: #0003;
+}
+
+:root {
+  --scroll-bar-thumb-bg-color: #333333;
+}
+
+:root {
+  --text-color: #111;
+  --text-opa-color: #777;
+}
+
+:root {
+  --dev-span-bg-color: #545454;
+  --dev-span-text-color: #eee;
+}
+
+:root {
+  --dev-code-bg-color: #e8e8e8;
+}
+
+:root {
+  --input-bd-color: #444;
+}
+
+:root {
+  --btn-hover-bg-color: #d9dbf3;
+  --btn-border-color: #2e2a8c;
+  --btn-active-border-color: #2545c5;
+  --btn-active-bg-color: #c0bef1;
+}
+
+:root {
+  --dev-active-btn-bg-color: #3632b0;
+  --dev-active-btn-text-color: #eee;
+}
+
+:root {
+  --copy-msg-bg-color: #999a;
+}

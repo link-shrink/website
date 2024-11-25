@@ -1,0 +1,15 @@
+@import url('../../style/utils/list.css');
+@import url('../../style/utils/display.css');
+
+.header {
+  height: 80px;
+}
+
+.logo a {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.header_items > *:hover {
+  color: var(--text-opa-color);
+}

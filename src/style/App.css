@@ -1,0 +1,50 @@
+@import url('./utils/container.css');
+@import url('./utils/display.css');
+@import url('./utils/list.css');
+@import url('./utils/color.css');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 100%;
+  outline: none;
+
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  ::selection {
+    background-color: var(--selection-bg-color);
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-thumb-bg-color);
+    border-radius: 10px;
+  }
+}
+
+html,
+body,
+#root {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Source Sans Pro, sans-serif;
+  font-size: 16px;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none !important;
+}
