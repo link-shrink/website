@@ -52,6 +52,11 @@ p {
 .dev_lans {
   display: flex;
   justify-content: space-around;
+  overflow: auto hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .dev_lans > * {
@@ -69,6 +74,16 @@ p {
   border-radius: 20px;
   line-height: 1.3;
   position: relative;
+}
+
+pre {
+  margin: 0;
+  position: relative;
+  overflow: auto hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .dev_btn {
