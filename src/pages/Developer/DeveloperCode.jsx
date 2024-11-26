@@ -46,15 +46,15 @@ export default function DeveloperCode() {
             )
           })}
         </div>
-        <pre className="dev_code">
-          {codeExamples.get[activeExample.get].code}
+        <div className="dev_code">
+          <pre>{codeExamples.get[activeExample.get].code}</pre>
           <Button
             className="dev_btn"
             onClick={() => copy(codeExamples.get[activeExample.get].code)}
           >
             <img className="icon" src={copyIcon} alt="copy" />
           </Button>
-        </pre>
+        </div>
       </div>
       <div className="dev_sub_title">Post</div>
       <div className="dev_lan_con list_y">
@@ -76,15 +76,15 @@ export default function DeveloperCode() {
             )
           })}
         </div>
-        <pre className="dev_code">
-          {codeExamples.post[activeExample.post].code}
+        <div className="dev_code">
+          <pre>{codeExamples.post[activeExample.post].code}</pre>
           <Button
             className="dev_btn"
             onClick={() => copy(codeExamples.post[activeExample.post].code)}
           >
             <img className="icon" src={copyIcon} alt="copy" />
           </Button>
-        </pre>
+        </div>
       </div>
     </>
   )
