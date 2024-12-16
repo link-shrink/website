@@ -11,7 +11,7 @@ export default function Header() {
           </div>
           <div className="header_items list_x">
             <Link to="/dev">Developer</Link>
-            <Link to="https://akbarjorayev.web.app">About me</Link>
+            <Link to="https://akbarswe.uz">About me</Link>
           </div>
         </div>
       </div>
