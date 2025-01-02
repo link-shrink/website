@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import Button from '../../components/Button/Button'
 import { codeExamples } from '../../info/codeExamples'
-import copyIcon from '../../media/icons/copy.svg'
+import { ReactComponent as CopyIcon } from '../../media/icons/copy.svg'
 
 export default function DeveloperCode() {
   const [activeExample, setActiveExample] = useState({
@@ -52,7 +52,7 @@ export default function DeveloperCode() {
             className="dev_btn"
             onClick={() => copy(codeExamples.get[activeExample.get].code)}
           >
-            <img className="icon" src={copyIcon} alt="copy" />
+            <CopyIcon className="icon" />
           </Button>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function DeveloperCode() {
             className="dev_btn"
             onClick={() => copy(codeExamples.post[activeExample.post].code)}
           >
-            <img className="icon" src={copyIcon} alt="copy" />
+            <CopyIcon className="icon" />
           </Button>
         </div>
       </div>

@@ -4,8 +4,8 @@ import Input from '../../components/Input/Input'
 import { isValidLink } from '../../script/link/validLink'
 import { getShortLinkID } from '../../script/link/getShortLinkID'
 import './Home.css'
-import copyIcon from '../../media/icons/copy.svg'
-import generateIcon from '../../media/icons/generate.svg'
+import { ReactComponent as CopyIcon } from '../../media/icons/copy.svg'
+import { ReactComponent as GenerateIcon } from '../../media/icons/generate.svg'
 
 export default function Home() {
   const linkInput = useRef()
@@ -65,7 +65,7 @@ export default function Home() {
               onClick={getLinkID}
               disabled={linkID === 'loading'}
             >
-              <img className="icon" src={generateIcon} alt="genetare" />
+              <GenerateIcon className="icon" />
             </Button>
           </div>
           {linkID &&
@@ -80,7 +80,7 @@ export default function Home() {
                     readOnly={true}
                   />
                   <Button className="home_copy_btn" onClick={copy}>
-                    <img className="icon" src={copyIcon} alt="copy" />
+                    <CopyIcon className="icon" />
                   </Button>
                 </div>
                 <div className={`copied_msg ${showCopied ? 'show' : ''}`}>
