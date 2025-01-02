@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import githubIcon from '../../media/icons/github.svg'
+import { ReactComponent as GithubIcon } from '../../media/icons/github.svg'
 
 export default function DeveloperSocialMedia() {
   return (
@@ -8,11 +8,7 @@ export default function DeveloperSocialMedia() {
         <div className="dev_sub_title">Social medias</div>
         <div className="d_f_ce">
           <Link to="https://github.com/AJ-LinkShrink">
-            <img
-              className="dev_social_media_icon"
-              src={githubIcon}
-              alt="github"
-            />
+            <GithubIcon className="dev_social_media_icon" />
           </Link>
         </div>
         <hr />
