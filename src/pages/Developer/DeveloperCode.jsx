@@ -28,7 +28,10 @@ export default function DeveloperCode() {
   return (
     <>
       <div className={`copied_msg ${showCopied ? 'show' : ''}`}>Copied</div>
-      <div className="dev_sub_title">Get</div>
+      <div className="dev_sub_title">
+        Get <span>/link/{`{link_id}`}</span>
+      </div>
+
       <div className="dev_lan_con list_y">
         <div className="dev_lans list_x">
           {devLanButtons.map((btn, i) => {
@@ -56,7 +59,9 @@ export default function DeveloperCode() {
           </Button>
         </div>
       </div>
-      <div className="dev_sub_title">Post</div>
+      <div className="dev_sub_title">
+        Post <span>/link/create</span>
+      </div>
       <div className="dev_lan_con list_y">
         <div className="dev_lans list_x">
           {devLanButtons.map((btn, i) => {
