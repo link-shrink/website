@@ -1,14 +1,11 @@
 export const codeExamples = {
   get: {
     javascript: {
-      code: `fetch("https://aj-linkshrink.onrender.com/api/get/link", {
+      code: `fetch("https://aj-linkshrink.onrender.com/link/{link_id}", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
   },
-  body: JSON.stringify({
-    link_id: "link-id",
-  }),
 })
   .then((response) => response.json())
   .then((data) => console.log(data))
@@ -17,69 +14,68 @@ export const codeExamples = {
     },
     python: {
       code: `import requests
-import json
 
-url = "https://aj-linkshrink.onrender.com/api/get/link"
+url = "https://aj-linkshrink.onrender.com/link/{link_id}"
 headers = {"Content-Type": "application/json"}
-data = {"link_id": "link-id"}
 
 try:
-    response = requests.get(url, headers=headers, json=data)
+    response = requests.get(url, headers=headers)
     response.raise_for_status()
-    print(response.json())
+    data = response.json()
+    print(data)
 except requests.exceptions.RequestException as error:
     print(f"Error: {error}")
 `,
     },
     java: {
-      code: `import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
+      code: `import java.net.*;
+import java.io.*;
+import java.util.Scanner;
 
-public class GetRequest {
-  public static void main(String[] args) {
-    try {
-      URL url = new URL("https://aj-linkshrink.onrender.com/api/get/link?link_id=link-id");
-      HttpURLConnection con = (HttpURLConnection) url.openConnection();
-      con.setRequestMethod("GET");
-      con.setRequestProperty("Content-Type", "application/json");
+public class FetchExample {
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("https://aj-linkshrink.onrender.com/link/{link_id}");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
 
-      int responseCode = con.getResponseCode();
-      System.out.println("Response Code: " + responseCode);
-
-      BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-      String inputLine;
-      StringBuffer response = new StringBuffer();
-
-      while ((inputLine = in.readLine()) != null) {
-        response.append(inputLine);
-      }
-      in.close();
-      System.out.println("Response: " + response.toString());
-    } catch (Exception e) {
-      System.out.println("Error: " + e.getMessage());
+            int responseCode = conn.getResponseCode();
+            if (responseCode == 200) {
+                Scanner scanner = new Scanner(conn.getInputStream());
+                StringBuilder response = new StringBuilder();
+                while (scanner.hasNext()) {
+                    response.append(scanner.nextLine());
+                }
+                scanner.close();
+                System.out.println(response.toString());
+            } else {
+                System.out.println("Error: " + responseCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-  }
-}`,
+}
+`,
     },
     php: {
       code: `<?php
-$url = "https://aj-linkshrink.onrender.com/api/get/link";
-$data = ["link_id" => "link-id"];
+
+$url = "https://aj-linkshrink.onrender.com/link/{link_id}";
 
 $options = [
     "http" => [
-        "header" => "Content-type: application/json\r",
         "method" => "GET",
-        "content" => json_encode($data),
+        "header" => "Content-Type: application/json\r\n",
     ],
 ];
 
 $context = stream_context_create($options);
 $response = file_get_contents($url, false, $context);
-if ($response === false) {
-    echo "Error";
+
+if ($response === FALSE) {
+    echo "Error: Unable to fetch data";
 } else {
     echo $response;
 }
@@ -88,68 +84,79 @@ if ($response === false) {
     },
     ruby: {
       code: `require 'net/http'
-require 'json'
 require 'uri'
+require 'json'
 
-uri = URI('https://aj-linkshrink.onrender.com/api/get/link')
-params = {
-  link_id: 'link-id'
-}
-uri.query = URI.encode_www_form(params)
+uri = URI("https://aj-linkshrink.onrender.com/link/{link_id}")
+request = Net::HTTP::Get.new(uri)
+request["Content-Type"] = "application/json"
 
-response = Net::HTTP.get(uri)
-puts response`,
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
+
+if response.is_a?(Net::HTTPSuccess)
+  data = JSON.parse(response.body)
+  puts data
+else
+  puts "Error: #{response.message}"
+end
+`,
     },
     go: {
       code: `package main
 
 import (
-  "bytes"
-  "encoding/json"
-  "fmt"
-  "io/ioutil"
-  "net/http"
+    "encoding/json"
+    "fmt"
+    "io/ioutil"
+    "net/http"
 )
 
 func main() {
-  url := "https://aj-linkshrink.onrender.com/api/get/link"
-  data := map[string]string{"link_id": "link-id"}
+    url := "https://aj-linkshrink.onrender.com/link/{link_id}"
 
-  jsonData, err := json.Marshal(data)
-  if err != nil {
-    fmt.Println("Error marshaling JSON:", err)
-    return
-  }
+    req, err := http.NewRequest("GET", url, nil)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    req.Header.Set("Content-Type", "application/json")
 
-  req, err := http.NewRequest("GET", url, bytes.NewBuffer(jsonData))
-  if err != nil {
-    fmt.Println("Error creating request:", err)
-    return
-  }
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+    defer resp.Body.Close()
 
-  req.Header.Set("Content-Type", "application/json")
-  client := &http.Client{}
-  resp, err := client.Do(req)
-  if err != nil {
-    fmt.Println("Error sending request:", err)
-    return
-  }
-  defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
 
-  body, _ := ioutil.ReadAll(resp.Body)
-  fmt.Println("Response:", string(body))
-}`,
+    var data map[string]interface{}
+    if err := json.Unmarshal(body, &data); err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+
+    fmt.Println(data)
+}
+`,
     },
   },
   post: {
     javascript: {
-      code: `fetch("https://aj-linkshrink.onrender.com/api/post/link", {
+      code: `fetch("https://aj-linkshrink.onrender.com/link/create", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    link_id: "link-id",
+    link: "original-link",
   }),
 })
   .then((response) => response.json())
@@ -159,78 +166,76 @@ func main() {
     },
     python: {
       code: `import requests
-import json
 
-url = "https://aj-linkshrink.onrender.com/api/post/link"
+url = "https://aj-linkshrink.onrender.com/link/create"
+data = {"link": "original-link"}
 headers = {"Content-Type": "application/json"}
-data = {"link_id": "link-id"}
 
 try:
-    response = requests.post(url, headers=headers, json=data)
+    response = requests.post(url, json=data, headers=headers)
     response.raise_for_status()
-    print(response.json())
+    result = response.json()
+    print(result)
 except requests.exceptions.RequestException as error:
     print(f"Error: {error}")
 `,
     },
     java: {
-      code: `import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.OutputStream;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
+      code: `import java.net.*;
+import java.io.*;
 
-public class PostRequest {
-  public static void main(String[] args) {
-    try {
-      URL url = new URL("https://aj-linkshrink.onrender.com/api/post/link");
-      HttpURLConnection con = (HttpURLConnection) url.openConnection();
-      con.setRequestMethod("POST");
-      con.setRequestProperty("Content-Type", "application/json");
+public class PostExample {
+    public static void main(String[] args) {
+        try {
+            URL url = new URL("https://aj-linkshrink.onrender.com/link/create");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
 
-      String jsonInputString = "{\"link_id\": \"link-id\"}";
+            String jsonInputString = "{\"link\":\"original-link\"}";
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = jsonInputString.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
 
-      con.setDoOutput(true);
-      try (OutputStream os = con.getOutputStream()) {
-        byte[] input = jsonInputString.getBytes("utf-8");
-        os.write(input, 0, input.length);
-      }
-
-      int responseCode = con.getResponseCode();
-      System.out.println("Response Code: " + responseCode);
-
-      BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-      String inputLine;
-      StringBuffer response = new StringBuffer();
-
-      while ((inputLine = in.readLine()) != null) {
-        response.append(inputLine);
-      }
-      in.close();
-      System.out.println("Response: " + response.toString());
-    } catch (Exception e) {
-      System.out.println("Error: " + e.getMessage());
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                StringBuilder response = new StringBuilder();
+                String responseLine;
+                while ((responseLine = br.readLine()) != null) {
+                    response.append(responseLine.trim());
+                }
+                System.out.println(response.toString());
+            } else {
+                System.out.println("Error: " + responseCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-  }
-}`,
+}
+`,
     },
     php: {
       code: `<?php
-$url = "https://aj-linkshrink.onrender.com/api/post/link";
-$data = ["link_id" => "link-id"];
 
+$url = "https://aj-linkshrink.onrender.com/link/create";
+$data = ["link" => "original-link"];
 $options = [
     "http" => [
-        "header" => "Content-type: application/json\r",
         "method" => "POST",
+        "header" => "Content-Type: application/json\r\n",
         "content" => json_encode($data),
     ],
 ];
 
 $context = stream_context_create($options);
 $response = file_get_contents($url, false, $context);
-if ($response === false) {
-    echo "Error";
+
+if ($response === FALSE) {
+    echo "Error: Unable to send data";
 } else {
     echo $response;
 }
@@ -239,58 +244,70 @@ if ($response === false) {
     },
     ruby: {
       code: `require 'net/http'
-require 'json'
 require 'uri'
+require 'json'
 
-uri = URI('https://aj-linkshrink.onrender.com/api/post/link')
-data = {
-  link_id: 'link-id'
-}
+uri = URI("https://aj-linkshrink.onrender.com/link/create")
+request = Net::HTTP::Post.new(uri)
+request["Content-Type"] = "application/json"
+request.body = { link: "original-link" }.to_json
 
-response = Net::HTTP.post(uri, data.to_json, {
-  "Content-Type" => "application/json"
-})
-puts response.body`,
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
+
+if response.is_a?(Net::HTTPSuccess)
+  data = JSON.parse(response.body)
+  puts data
+else
+  puts "Error: #{response.message}"
+end
+`,
     },
     go: {
       code: `package main
 
 import (
-  "bytes"
-  "encoding/json"
-  "fmt"
-  "io/ioutil"
-  "net/http"
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 func main() {
-  url := "https://aj-linkshrink.onrender.com/api/post/link"
-  data := map[string]string{"link_id": "link-id"}
+	url := "https://aj-linkshrink.onrender.com/link/create"
+	payload := map[string]string{"link": "original-link"}
+	jsonData, err := json.Marshal(payload)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 
-  jsonData, err := json.Marshal(data)
-  if err != nil {
-    fmt.Println("Error marshaling JSON:", err)
-    return
-  }
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
 
-  req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
-  if err != nil {
-    fmt.Println("Error creating request:", err)
-    return
-  }
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	defer resp.Body.Close()
 
-  req.Header.Set("Content-Type", "application/json")
-  client := &http.Client{}
-  resp, err := client.Do(req)
-  if err != nil {
-    fmt.Println("Error sending request:", err)
-    return
-  }
-  defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 
-  body, _ := ioutil.ReadAll(resp.Body)
-  fmt.Println("Response:", string(body))
-}`,
+	fmt.Println(string(body))
+}
+`,
     },
   },
 }
