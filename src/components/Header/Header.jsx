@@ -7,7 +7,7 @@ export default function Header() {
       <div className="container container_header">
         <div className="header d_f_ai_ce d_f_jc_sb">
           <div className="logo">
-            <Link to="/">Linkshrink</Link>
+            <Link to="/">Q</Link>
           </div>
           <div className="header_links list_x">
             <Link to="/dev">Developer</Link>

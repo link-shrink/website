@@ -18,12 +18,10 @@ export default function Home() {
   }).current
 
   function copy() {
-    navigator.clipboard
-      .writeText(`aj-linkshrink.web.app/l/${linkID}`)
-      .then(() => {
-        setShowCopied(true)
-        setTimeout(() => setShowCopied(false), 2000)
-      })
+    navigator.clipboard.writeText(`q.uz/${linkID}`).then(() => {
+      setShowCopied(true)
+      setTimeout(() => setShowCopied(false), 2000)
+    })
   }
 
   async function getLinkID() {
@@ -75,7 +73,7 @@ export default function Home() {
               <>
                 <div className="list_x">
                   <Input
-                    value={`aj-linkshrink.web.app/l/${linkID}`}
+                    value={`q.uz/${linkID}`}
                     placeholder="URL"
                     readOnly={true}
                   />

@@ -7,7 +7,7 @@ export default function DeveloperSocialMedia() {
       <div className="list_y">
         <div className="dev_sub_title">Social medias</div>
         <div className="d_f_ce">
-          <Link to="https://github.com/AJ-LinkShrink">
+          <Link to="https://github.com/link-shrink">
             <GithubIcon className="dev_social_media_icon" />
           </Link>
         </div>
