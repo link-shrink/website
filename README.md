@@ -1,2 +1,2 @@
-# AJ-Linkshrink
-AJ-Linkshrink make your url simpler
+# Linkshrink
+Linkshrink make your url simpler
