@@ -18,7 +18,7 @@ export default function Home() {
   }).current
 
   function copy() {
-    navigator.clipboard.writeText(`q.uz/${linkID}`).then(() => {
+    navigator.clipboard.writeText(`keskn.uz/${linkID}`).then(() => {
       setShowCopied(true)
       setTimeout(() => setShowCopied(false), 2000)
     })
@@ -73,7 +73,7 @@ export default function Home() {
               <>
                 <div className="list_x">
                   <Input
-                    value={`q.uz/${linkID}`}
+                    value={`keskn.uz/${linkID}`}
                     placeholder="URL"
                     readOnly={true}
                   />
