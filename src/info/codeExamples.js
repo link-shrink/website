@@ -1,7 +1,7 @@
 export const codeExamples = {
   get: {
     javascript: {
-      code: `fetch("https://api.q.uz/link/{link_id}", {
+      code: `fetch("https://api.keskn.uz/link/{link_id}", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const codeExamples = {
     python: {
       code: `import requests
 
-url = "https://api.q.uz/link/{link_id}"
+url = "https://api.keskn.uz/link/{link_id}"
 headers = {"Content-Type": "application/json"}
 
 try:
@@ -35,7 +35,7 @@ import java.util.Scanner;
 public class FetchExample {
     public static void main(String[] args) {
         try {
-            URL url = new URL("https://api.q.uz/link/{link_id}");
+            URL url = new URL("https://api.keskn.uz/link/{link_id}");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -62,7 +62,7 @@ public class FetchExample {
     php: {
       code: `<?php
 
-$url = "https://api.q.uz/link/{link_id}";
+$url = "https://api.keskn.uz/link/{link_id}";
 
 $options = [
     "http" => [
@@ -87,7 +87,7 @@ if ($response === FALSE) {
 require 'uri'
 require 'json'
 
-uri = URI("https://api.q.uz/link/{link_id}")
+uri = URI("https://api.keskn.uz/link/{link_id}")
 request = Net::HTTP::Get.new(uri)
 request["Content-Type"] = "application/json"
 
@@ -114,7 +114,7 @@ import (
 )
 
 func main() {
-    url := "https://api.q.uz/link/{link_id}"
+    url := "https://api.keskn.uz/link/{link_id}"
 
     req, err := http.NewRequest("GET", url, nil)
     if err != nil {
@@ -150,7 +150,7 @@ func main() {
   },
   post: {
     javascript: {
-      code: `fetch("https://api.q.uz/link/create", {
+      code: `fetch("https://api.keskn.uz/link/create", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -167,7 +167,7 @@ func main() {
     python: {
       code: `import requests
 
-url = "https://api.q.uz/link/create"
+url = "https://api.keskn.uz/link/create"
 data = {"link": "original-link"}
 headers = {"Content-Type": "application/json"}
 
@@ -187,7 +187,7 @@ import java.io.*;
 public class PostExample {
     public static void main(String[] args) {
         try {
-            URL url = new URL("https://api.q.uz/link/create");
+            URL url = new URL("https://api.keskn.uz/link/create");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
@@ -221,7 +221,7 @@ public class PostExample {
     php: {
       code: `<?php
 
-$url = "https://api.q.uz/link/create";
+$url = "https://api.keskn.uz/link/create";
 $data = ["link" => "original-link"];
 $options = [
     "http" => [
@@ -247,7 +247,7 @@ if ($response === FALSE) {
 require 'uri'
 require 'json'
 
-uri = URI("https://api.q.uz/link/create")
+uri = URI("https://api.keskn.uz/link/create")
 request = Net::HTTP::Post.new(uri)
 request["Content-Type"] = "application/json"
 request.body = { link: "original-link" }.to_json
@@ -276,7 +276,7 @@ import (
 )
 
 func main() {
-	url := "https://api.q.uz/link/create"
+	url := "https://api.keskn.uz/link/create"
 	payload := map[string]string{"link": "original-link"}
 	jsonData, err := json.Marshal(payload)
 	if err != nil {
