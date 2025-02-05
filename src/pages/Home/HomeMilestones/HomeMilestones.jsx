@@ -1,5 +1,6 @@
 import { useGetFirestore } from '../../../hooks/useFirebase'
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner'
+import { formatNumberLocalized } from '../../../script/convert/numbers'
 import './HomeMilestones.css'
 
 export default function HomeMilestones() {
@@ -20,20 +21,23 @@ export default function HomeMilestones() {
       <div className="milestones_con list_x">
         <div className="milestones_item list_y">
           <div className="milestones_item_num d_f_ce">
-            {milestones.quantity}
+            {formatNumberLocalized(milestones.quantity)}
           </div>
           <div className="milestones_item_text d_f_ce">links were shorten</div>
         </div>
         <div className="milestones_item list_y">
           <div className="milestones_item_num d_f_ce">
-            {milestones.original_length}
+            {formatNumberLocalized(milestones.original_length)}
           </div>
           <div className="milestones_item_text d_f_ce">length of links</div>
         </div>
         <div className="milestones_item list_y">
           <div className="milestones_item_num d_f_ce">
-            {((milestones.original_length - milestones.short_length) * 100) /
-              milestones.original_length || '0'}
+            {formatNumberLocalized(
+              ((milestones.original_length - milestones.short_length) * 100) /
+                milestones.original_length
+            ) || '0'}
+            %
           </div>
           <div className="milestones_item_text d_f_ce">links reduced</div>
         </div>
