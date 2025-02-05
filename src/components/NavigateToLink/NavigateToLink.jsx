@@ -1,15 +1,24 @@
 import { useRef, useState, useEffect } from 'react'
-import { useGetFirestore } from '../../hooks/useFirebase'
 import { sendToLink } from '../../script/sendToLink'
+import { getOriginalLink } from '../../modules/links'
 import './NavigateToLink.css'
 
 export default function NavigateToLink() {
   const url = useRef(window.location.pathname).current
-  const [data] = useGetFirestore(`links/${url.split('/').at(-1)}`)
+  const [data, setData] = useState(null)
   const [txt, setTxt] = useState('Loading Link')
 
   useEffect(() => {
-    if (data === 'loading') {
+    async function loadData() {
+      const originalLink = await getOriginalLink(url.split('/').at(-1))
+      setData(originalLink)
+    }
+
+    loadData()
+  }, [url])
+
+  useEffect(() => {
+    if (data === null) {
       setTxt('Loading link')
     } else if (!data?.original_link) {
       setTxt('Link not found')

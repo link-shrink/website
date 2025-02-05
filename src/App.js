@@ -19,8 +19,8 @@ export default function App() {
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/:linkId" element={<NavigateToLink />} />
             <Route path="/dev" element={<Developer />} />
+            <Route path="/:linkId" element={<NavigateToLink />} />
           </Routes>
         </Suspense>
         <Footer />

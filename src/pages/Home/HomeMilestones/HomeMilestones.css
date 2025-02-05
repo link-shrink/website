@@ -1,0 +1,68 @@
+.milestones_con {
+  width: 100%;
+  height: 200px !important;
+}
+
+.milestones_item {
+  width: calc(100% / 3);
+  border: 2px solid transparent;
+  border-radius: 30px;
+  background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+    radial-gradient(
+        circle,
+        var(--milestone-1-color),
+        var(--milestone-2-color),
+        var(--milestone-3-color),
+        var(--milestone-4-color)
+      )
+      border-box;
+}
+
+.milestones_item_num {
+  flex: 1;
+  font-size: 4em;
+  color: var(--milestone-1-color);
+}
+
+.milestones_item_text {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding-bottom: 20px;
+  color: var(--text-opa-color)
+}
+
+.milestones_item:nth-child(1) {
+  --milestone-1-color: var(--milestone-11-color);
+  --milestone-2-color: var(--milestone-12-color);
+  --milestone-3-color: var(--milestone-13-color);
+  --milestone-4-color: var(--milestone-14-color);
+}
+
+.milestones_item:nth-child(2) {
+  --milestone-1-color: var(--milestone-21-color);
+  --milestone-2-color: var(--milestone-22-color);
+  --milestone-3-color: var(--milestone-23-color);
+  --milestone-4-color: var(--milestone-24-color);
+}
+
+.milestones_item:nth-child(3) {
+  --milestone-1-color: var(--milestone-31-color);
+  --milestone-2-color: var(--milestone-32-color);
+  --milestone-3-color: var(--milestone-33-color);
+  --milestone-4-color: var(--milestone-34-color);
+}
+
+:root {
+  --milestone-11-color: light-dark(#5ea73b, #99d16b);
+  --milestone-12-color: light-dark(#2ea118, #7edb4d);
+  --milestone-13-color: light-dark(#34a24f, #5ba944);
+  --milestone-14-color: light-dark(#1d8c23, #33c933);
+  --milestone-21-color: light-dark(#c06e2b, #ed9c6a);
+  --milestone-22-color: light-dark(#d74f2a, #f35c41);
+  --milestone-23-color: light-dark(#9b5a3f, #bb6a4e);
+  --milestone-24-color: light-dark(#cf3e1e, #d65b33);
+  --milestone-31-color: light-dark(#4158d3, #8a85e5);
+  --milestone-32-color: light-dark(#1f44bb, #4a6ce1);
+  --milestone-33-color: light-dark(#2e5b9b, #627db6);
+  --milestone-34-color: light-dark(#1c3d80, #3b5cb0);
+}
