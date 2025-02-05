@@ -1,15 +1,16 @@
 import { useRef, useState } from 'react'
-import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
+import Button from '../../components/Button/Button'
+import HomeMilestones from './HomeMilestones/HomeMilestones'
 import { isValidLink } from '../../script/link/validLink'
-import { getShortLinkID } from '../../script/link/getShortLinkID'
+import { createShortLink } from '../../modules/links'
 import './Home.css'
 import { ReactComponent as CopyIcon } from '../../media/icons/copy.svg'
 import { ReactComponent as GenerateIcon } from '../../media/icons/generate.svg'
 
 export default function Home() {
   const linkInput = useRef()
-  const [linkID, setLinkID] = useState('')
+  const [shortLink, setShortLink] = useState('')
   const [showCopied, setShowCopied] = useState(false)
   const [inputVal, setInputVal] = useState('')
   const statesForID = useRef({
@@ -18,7 +19,7 @@ export default function Home() {
   }).current
 
   function copy() {
-    navigator.clipboard.writeText(`keskn.uz/${linkID}`).then(() => {
+    navigator.clipboard.writeText(shortLink).then(() => {
       setShowCopied(true)
       setTimeout(() => setShowCopied(false), 2000)
     })
@@ -26,57 +27,54 @@ export default function Home() {
 
   async function getLinkID() {
     if (!isValidLink(inputVal)) {
-      setLinkID('invalid')
+      setShortLink('invalid')
       linkInput.current.focus()
       return
     }
     if (!inputVal) return
-    setLinkID('loading')
-    const shortLink = await getShortLinkID(inputVal.trim())
+    setShortLink('loading')
+    const shortLink = await createShortLink(inputVal.trim())
+    console.log(shortLink)
     if (!shortLink.ok) {
       setInputVal('')
-      setLinkID('error')
+      setShortLink('error')
       return
     }
-    setLinkID(shortLink.data.link_id)
+    setShortLink(shortLink.short_link)
   }
 
   return (
     <>
-      <div className="container container_content d_f_ce">
-        <div className="list_y home_container">
+      <div className="container container_content home_container d_f_ce">
+        <div className="list_y">
           <div className="list_x">
             <Input
               ref={linkInput}
               className={`${
-                linkID === 'invalid' ? 'home_link_input invalid' : ''
+                shortLink === 'invalid' ? 'home_link_input invalid' : ''
               }`}
               placeholder="URL"
               autoFocus={true}
               onChange={(e) => {
                 setInputVal(e.target.value)
-                if (linkID === 'invalid') setLinkID('')
+                if (shortLink === 'invalid') setShortLink('')
               }}
             />
             <Button
               className="home_copy_btn"
               onClick={getLinkID}
-              disabled={linkID === 'loading'}
+              disabled={shortLink === 'loading'}
             >
               <GenerateIcon className="icon" />
             </Button>
           </div>
-          {linkID &&
-            linkID !== 'loading' &&
-            linkID !== 'error' &&
-            linkID !== 'invalid' && (
+          {shortLink &&
+            shortLink !== 'loading' &&
+            shortLink !== 'error' &&
+            shortLink !== 'invalid' && (
               <>
                 <div className="list_x">
-                  <Input
-                    value={`keskn.uz/${linkID}`}
-                    placeholder="URL"
-                    readOnly={true}
-                  />
+                  <Input value={shortLink} placeholder="URL" readOnly={true} />
                   <Button className="home_copy_btn" onClick={copy}>
                     <CopyIcon className="icon" />
                   </Button>
@@ -86,14 +84,15 @@ export default function Home() {
                 </div>
               </>
             )}
-          {(linkID === 'loading' || linkID === 'error') && (
+          {(shortLink === 'loading' || shortLink === 'error') && (
             <Input
-              value={statesForID[linkID]}
+              value={statesForID[shortLink]}
               className="home_readonly_input"
               readOnly={true}
             />
           )}
         </div>
+        <HomeMilestones />
       </div>
     </>
   )

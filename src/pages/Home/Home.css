@@ -1,6 +1,10 @@
 @import url('../../style/utils/icon.css');
 
-.home_container > * {
+.home_container {
+  padding: 0;
+  justify-content: space-evenly;
+}
+.home_container input {
   width: 100%;
   width: 300px;
 }
