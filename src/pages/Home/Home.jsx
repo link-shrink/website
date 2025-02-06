@@ -34,13 +34,15 @@ export default function Home() {
     if (!inputVal) return
     setShortLink('loading')
     const shortLink = await createShortLink(inputVal.trim())
-    console.log(shortLink)
     if (!shortLink.ok) {
       setInputVal('')
       setShortLink('error')
       return
     }
-    setShortLink(shortLink.short_link)
+
+    if (shortLink.short_link.includes('https://')) {
+      setShortLink(shortLink.short_link.replace('https://', ''))
+    }
   }
 
   return (
@@ -53,7 +55,7 @@ export default function Home() {
               className={`${
                 shortLink === 'invalid' ? 'home_link_input invalid' : ''
               }`}
-              placeholder="URL"
+              placeholder="Long URL"
               autoFocus={true}
               onChange={(e) => {
                 setInputVal(e.target.value)

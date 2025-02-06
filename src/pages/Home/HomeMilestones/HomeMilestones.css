@@ -28,7 +28,7 @@
   font-size: 1.2em;
   font-weight: bold;
   padding-bottom: 20px;
-  color: var(--text-opa-color)
+  color: var(--text-opa-color);
 }
 
 .milestones_item:nth-child(1) {
@@ -50,6 +50,28 @@
   --milestone-2-color: var(--milestone-32-color);
   --milestone-3-color: var(--milestone-33-color);
   --milestone-4-color: var(--milestone-34-color);
+}
+
+@media (max-width: 768px) {
+  .home_container {
+    padding: 20px !important;
+    justify-content: flex-start !important;
+  }
+
+  .milestones_con {
+    height: auto !important;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+
+  .milestones_item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .milestones_item {
+    width: 100%;
+  }
 }
 
 :root {
