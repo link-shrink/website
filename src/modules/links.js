@@ -1,5 +1,5 @@
 export async function createShortLink(link) {
-  const response = await fetch('https://api.keskn.uz/link/create', {
+  const response = await fetch('https://l-cutt-ggdpg0bhgwhcd4cs.northcentralus-01.azurewebsites.net/link/create', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export async function createShortLink(link) {
 }
 
 export async function getOriginalLink(linkId) {
-  const response = await fetch(`https://api.keskn.uz/link/${linkId}`, {
+  const response = await fetch(`https://l-cutt-ggdpg0bhgwhcd4cs.northcentralus-01.azurewebsites.net/link/${linkId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

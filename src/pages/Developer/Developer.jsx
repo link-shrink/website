@@ -11,7 +11,7 @@ export default function Developer() {
         <div className="list_y">
           <div className="dev_sub_title">Overview</div>
           <p>
-            <span>api.keskn.uz</span> Keskn is a simple URL shortening API that
+            <span>l-cutt-ggdpg0bhgwhcd4cs.northcentralus-01.azurewebsites.net</span> Keskn is a simple URL shortening API that
             allows you to convert long URLs into shorter, more manageable links.
             It uses FastAPI for the backend and integrates with Firebase
             Firestore for storage. The API is deployed on Microsoft Azure for
