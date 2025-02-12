@@ -11,5 +11,11 @@ export function formatNumberLocalized(number, locale = 'en-US') {
     maximumFractionDigits: number < 10 && unitIndex > 0 ? 1 : 0,
   }).format(number)
 
-  return formattedNumber + units[unitIndex]
+  return {
+    formatted: formattedNumber + units[unitIndex],
+    parts: {
+      number: parseFloat(formattedNumber),
+      suffix: units[unitIndex],
+    },
+  }
 }
